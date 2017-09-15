@@ -16,6 +16,8 @@ module.exports = smokestack
 function smokestack(opts) {
   opts = opts || {}
 
+  console.log([].slice.call(arguments))
+
   var browser   = opts.browser || 'chrome'
   var saucelabs = !!opts.saucelabs || process.env.SAUCE
   var sauceUser = opts.sauceUsername || process.env.SAUCE_USERNAME
@@ -30,7 +32,7 @@ function smokestack(opts) {
   var script = false
 
   var stream = through(write, flush)
-  var server = createServer()
+  var server = createServer(null, opts)
   var port   = opts.port || 0
   var buffer = []
 
